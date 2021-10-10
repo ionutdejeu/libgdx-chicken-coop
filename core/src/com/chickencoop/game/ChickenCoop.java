@@ -1,31 +1,33 @@
 package com.chickencoop.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.chickencoop.screens.GameplayScreen;
 
-public class ChickenCoop extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	
+public class ChickenCoop extends Game {
+	static public Skin gameSkin;
+
 	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+	public void create() {
+
+		gameSkin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+		GameplayScreen main_screen = new GameplayScreen(this);
+		//main_screen.create();
+		this.setScreen(main_screen);
 	}
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+		super.render();
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
-		img.dispose();
+
 	}
 }
